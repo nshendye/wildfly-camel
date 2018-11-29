@@ -4,6 +4,7 @@
     <property name="jboss.api" value="private" />
   </properties>
   <resources>
+    <artifact name="${io.grpc:grpc-api}" />
     <artifact name="${io.grpc:grpc-auth}" />
     <artifact name="${io.grpc:grpc-context}" />
     <artifact name="${io.grpc:grpc-core}" />
@@ -26,7 +27,7 @@
     <module name="com.google.auth.google-auth-library-credentials" />
     <module name="com.google.code.gson" slot="fuse" />
     <module name="com.google.protobuf" />
+    <module name="io.perfmark.api" />
     <module name="org.apache.commons.codec" slot="fuse" />
-    <module name="org.bouncycastle" slot="1.61" />
   </dependencies>
 </module>

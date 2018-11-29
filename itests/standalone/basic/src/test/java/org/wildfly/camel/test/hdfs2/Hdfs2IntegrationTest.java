@@ -84,6 +84,7 @@ public class Hdfs2IntegrationTest {
 
     @Test
     public void testHdfs2Component() throws Exception {
+
         Assume.assumeFalse("[#1961] Hdfs2IntegrationTest fails on Windows", EnvironmentUtils.isWindows());
 
         String dataDir = Paths.get(System.getProperty("jboss.server.data.dir"), "hadoop").toString();
@@ -112,7 +113,7 @@ public class Hdfs2IntegrationTest {
                 template.sendBody("direct:start", body);
             }
 
-            camelctx.startRoute("hdfs-consumer");
+            camelctx.getRouteController().startRoute("hdfs-consumer");
 
             MockEndpoint mockEndpoint = camelctx.getEndpoint("mock:result", MockEndpoint.class);
             mockEndpoint.expectedBodiesReceivedInAnyOrder(bodies);

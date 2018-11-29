@@ -81,6 +81,8 @@ public class SftpIntegrationTest {
 
         File testFile = resolvePath(FTP_ROOT_DIR).resolve("test.txt").toFile();
         CamelContext camelctx = new DefaultCamelContext();
+
+        camelctx.start();
         try {
             Endpoint endpoint = camelctx.getEndpoint(getSftpEndpointUri());
             Assert.assertFalse(testFile.exists());

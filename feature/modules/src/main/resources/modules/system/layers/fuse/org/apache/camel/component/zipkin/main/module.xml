@@ -4,15 +4,14 @@
     <artifact name="${io.zipkin.brave:brave}" />
     <artifact name="${io.zipkin.brave:brave-context-slf4j}" />
     <artifact name="${org.apache.camel:camel-zipkin}" />
-    <artifact name="${io.zipkin.zipkin2:zipkin}" />
-    <artifact name="${io.zipkin.reporter2:zipkin-reporter}" />
-    <artifact name="${io.zipkin.reporter2:zipkin-sender-libthrift}" />
-    <artifact name="${io.zipkin.reporter2:zipkin-sender-urlconnection}" />
+    <artifact name="${org.apache.zipkin.zipkin2:zipkin}" />
+    <artifact name="${org.apache.zipkin.reporter2:zipkin-reporter}" />
+    <artifact name="${org.apache.zipkin.reporter2:zipkin-sender-libthrift}" />
+    <artifact name="${org.apache.zipkin.reporter2:zipkin-sender-urlconnection}" />
   </resources>
   <dependencies>
     <module name="org.apache.thrift" slot="fuse" />
     <module name="org.slf4j" />
-    <module name="javax.xml.bind.api" />
     <module name="org.apache.camel.core" />
   </dependencies>
   <exports>

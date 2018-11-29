@@ -98,7 +98,7 @@
                             </goals>
                             <phase>generate-test-resources</phase>
                             <configuration>
-                                <install-dir>${project.build.directory}/wildfly-${version.wildfly}</install-dir>
+                                <install-dir>${project.build.directory}/${jboss.server.name}</install-dir>
                                 <offline>false</offline>
                                 <resolve-locals>
                                     <resolve-local>

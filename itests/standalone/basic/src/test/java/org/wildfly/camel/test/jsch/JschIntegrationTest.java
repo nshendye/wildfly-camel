@@ -80,6 +80,8 @@ public class JschIntegrationTest {
 
         File testFile = resolvePath(SSHD_ROOT_DIR).resolve("test.txt").toFile();
         CamelContext camelctx = new DefaultCamelContext();
+
+        camelctx.start();
         try {
             Endpoint endpoint = camelctx.getEndpoint(getScpEndpointUri());
             Assert.assertFalse(testFile.exists());

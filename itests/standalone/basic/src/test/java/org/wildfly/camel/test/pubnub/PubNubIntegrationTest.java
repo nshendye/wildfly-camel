@@ -19,18 +19,19 @@
  */
 package org.wildfly.camel.test.pubnub;
 
+import static com.pubnub.api.enums.PNHeartbeatNotificationOptions.NONE;
+import static org.apache.camel.component.pubnub.PubNubConstants.CHANNEL;
+import static org.apache.camel.component.pubnub.PubNubConstants.TIMETOKEN;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-import com.pubnub.api.PNConfiguration;
-import com.pubnub.api.PubNub;
-import com.pubnub.api.enums.PNLogVerbosity;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.support.jndi.JndiBeanRepository;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -38,16 +39,19 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wildfly.camel.test.pubnub.subA.FakePubNubPublishAPIServlet;
 import org.wildfly.extension.camel.CamelAware;
-import static com.pubnub.api.enums.PNHeartbeatNotificationOptions.NONE;
-import static org.apache.camel.component.pubnub.PubNubConstants.CHANNEL;
-import static org.apache.camel.component.pubnub.PubNubConstants.TIMETOKEN;
+
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.enums.PNLogVerbosity;
 
 @CamelAware
 @RunWith(Arquillian.class)
+@Ignore("[#2828] NoSuchMethodError: HttpUrl.get(String)")
 public class PubNubIntegrationTest {
 
     @ArquillianResource
@@ -81,17 +85,17 @@ public class PubNubIntegrationTest {
 
     @Test
     public void testPubNubPublish() throws Exception {
-        CamelContext camelctx = new DefaultCamelContext();
+        CamelContext camelctx = new DefaultCamelContext(new JndiBeanRepository());
         camelctx.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
                 from("direct:start")
                 .to("pubnub:publishChannel?pubnub=#pubnub")
-                .to("mock:result");
+                .to("mock:resultA");
             }
         });
 
-        MockEndpoint mockEndpoint = camelctx.getEndpoint("mock:result", MockEndpoint.class);
+        MockEndpoint mockEndpoint = camelctx.getEndpoint("mock:resultA", MockEndpoint.class);
         mockEndpoint.expectedMessageCount(1);
         mockEndpoint.expectedHeaderReceived(TIMETOKEN, "14598111595318003");
 
@@ -108,20 +112,20 @@ public class PubNubIntegrationTest {
 
     @Test
     public void testPubNubSubscriber() throws Exception {
-        CamelContext camelctx = new DefaultCamelContext();
+        CamelContext camelctx = new DefaultCamelContext(new JndiBeanRepository());
         camelctx.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
                 from("pubnub:subscriberChannel?pubnub=#pubnub").id("subscriber").autoStartup(false)
-                .to("mock:result");
+                .to("mock:resultB");
             }
         });
 
         camelctx.start();
         try {
-            MockEndpoint mockEndpoint = camelctx.getEndpoint("mock:result", MockEndpoint.class);
+            MockEndpoint mockEndpoint = camelctx.getEndpoint("mock:resultB", MockEndpoint.class);
 
-            camelctx.startRoute("subscriber");
+            camelctx.getRouteController().startRoute("subscriber");
             mockEndpoint.expectedMinimumMessageCount(1);
             mockEndpoint.expectedHeaderReceived(CHANNEL, "subscriberChannel");
             mockEndpoint.assertIsSatisfied();

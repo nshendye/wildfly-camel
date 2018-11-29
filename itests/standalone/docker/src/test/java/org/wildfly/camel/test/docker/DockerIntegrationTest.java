@@ -54,7 +54,6 @@ public class DockerIntegrationTest {
     public void testDockerComponentForUnixSocket() throws Exception {
         File dockerSocket = new File("/var/run/docker.sock");
 
-        Assume.assumeTrue("[#2287] Docker component cannot use TLS", System.getenv("DOCKER_TLS_VERIFY") == null);
         Assume.assumeTrue("Docker socket /var/run/docker.sock does not exist or is not writable", dockerSocket.exists() && dockerSocket.canWrite());
 
         CamelContext camelctx = new DefaultCamelContext();
@@ -62,7 +61,7 @@ public class DockerIntegrationTest {
             @Override
             public void configure() throws Exception {
                 from("direct:start")
-                .toF("docker:version?socket=true");
+                .toF("docker:version?socket=true&host=%s", dockerSocket.getPath());
             }
         });
 
@@ -79,7 +78,6 @@ public class DockerIntegrationTest {
 
     @Test
     public void testDockerComponentForHostnameAndPort() throws Exception {
-        Assume.assumeTrue("[#2287] Docker component cannot use TLS", System.getenv("DOCKER_TLS_VERIFY") == null);
         Assume.assumeNotNull("DOCKER_HOST environment variable is not set", System.getenv("DOCKER_HOST"));
 
         CamelContext camelctx = new DefaultCamelContext();
