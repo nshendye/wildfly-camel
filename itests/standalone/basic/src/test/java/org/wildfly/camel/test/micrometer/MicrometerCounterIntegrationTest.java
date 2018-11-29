@@ -34,6 +34,7 @@ import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHis
 import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyFactory;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.support.jndi.JndiBeanRepository;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -169,7 +170,7 @@ public class MicrometerCounterIntegrationTest {
     }
 
     private CamelContext createCamelContext() throws Exception {
-        CamelContext camelctx = new DefaultCamelContext();
+        CamelContext camelctx = new DefaultCamelContext(new JndiBeanRepository());
         camelctx.addRoutePolicyFactory(new MicrometerRoutePolicyFactory());
         camelctx.setMessageHistoryFactory(new MicrometerMessageHistoryFactory());
         camelctx.addRoutes(new RouteBuilder() {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.1" name="org.w3c.css.sac">
+<module xmlns="urn:jboss:module:1.1" name="net.i2p.crypto">
   <properties>
     <property name="jboss.api" value="private" />
   </properties>
   <resources>
-    <artifact name="${org.w3c.css:sac}" />
+    <artifact name="${net.i2p.crypto:eddsa}" />
   </resources>
   <dependencies />
 </module>

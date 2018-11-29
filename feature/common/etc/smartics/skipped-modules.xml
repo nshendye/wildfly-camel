@@ -90,8 +90,13 @@
         <include artifact="com.github.luben:zstd-jni" />
     </module>
 
+    <module name="com.github.spotbugs" skip="true">
+        <include artifact="com.github.spotbugs:spotbugs-annotations" />
+    </module>
+
     <module name="com.google.android" skip="true">
         <include artifact="com.google.android:android"/>
+        <include artifact="com.google.android:annotations"/>
     </module>
 
     <module name="com.google.auto.value" skip="true">
@@ -195,6 +200,8 @@
 
     <module name="com.zaxxer" skip="true">
         <include artifact="com.zaxxer:HikariCP-java6" />
+        <include artifact="com.zaxxer:HikariCP-java7" />
+        <include artifact="com.zaxxer:HikariCP-java8" />
     </module>
 
     <module name="io.javaslang" skip="true">
@@ -229,8 +236,8 @@
         <include artifact="io.sundr:sundr-codegen" />
     </module>
 
-    <module name="io.zipkin.skipped" skip="true">
-        <include artifact="io.zipkin.reporter:zipkin-reporter" />
+    <module name="javax.money" skip="true">
+        <include artifact="javax.money:money-api" />
     </module>
 
     <module name="jaxmeapi" skip="true">
@@ -281,6 +288,10 @@
         <include artifact="net.sf.kxml:(.*)" />
     </module>
 
+    <module name="net.sf.trove4j" skip="true">
+        <include artifact="net.sf.trove4j:core" />
+    </module>
+
     <module name="org.apache.aries.blueprint" skip="true">
         <include artifact="org.apache.aries.blueprint:(.*)" />
     </module>
@@ -290,7 +301,8 @@
     </module>
 
     <module name="org.apache.avro.ipc" skip="true">
-        <include artifact="org.apache.avro:avro-ipc" />
+        <include artifact="org.apache.avro:avro-ipc-jetty" />
+        <include artifact="org.apache.avro:avro-ipc-netty" />
     </module>
 
     <module name="org.apache.camel.apt" skip="true">
@@ -335,10 +347,6 @@
         <include artifact="org.apache.httpcomponents:httpclient-osgi" />
     </module>
 
-    <module name="org.jetbrains.annotations" skip="true">
-        <include artifact="org.jetbrains:annotations" />
-    </module>
-
     <module name="org.apache.logging.log4j" skip="true">
         <include artifact="org.apache.logging.log4j:log4j-to-slf4j" />
     </module>
@@ -381,6 +389,11 @@
         <include artifact="org.apache.yetus:audience-annotations" />
     </module>
 
+    <module name="org.apache.zipkin2.skipped" skip="true">
+        <include artifact="io.zipkin.zipkin2:zipkin" />
+        <include artifact="io.zipkin.reporter2:zipkin-reporter" />
+    </module>
+
     <module name="org.atmosphere.skipped" skip="true">
         <include artifact="org.atmosphere:atmosphere-compat-jbossweb"/>
         <include artifact="org.atmosphere:atmosphere-compat-tomcat"/>
@@ -398,8 +411,8 @@
         <include artifact="org.codehaus.plexus:(.*)" />
     </module>
 
-    <module name="org.codehaus.woodstox.core" skip="true">
-        <include artifact=":woodstox-core" />
+    <module name="org.drools.kie" skip="true">
+        <include artifact="org.drools:kie-pmml" />
     </module>
 
     <module name="org.eclipse.jetty.skipped" skip="true">
@@ -439,6 +452,7 @@
         <include artifact="org.glassfish.jersey.connectors:jersey-apache-connector" />
         <include artifact="org.glassfish.jersey.core:jersey-client" />
         <include artifact="org.glassfish.jersey.core:jersey-common" />
+        <include artifact="org.glassfish.jersey.inject:jersey-hk2" />
     </module>
 
     <module name="org.immutables.value" skip="true">
@@ -454,6 +468,10 @@
 
     <module name="org.jasypt" skip="true">
         <include artifact="org.jasypt:jasypt" />
+    </module>
+
+    <module name="org.javamoney.moneta" skip="true">
+        <include artifact="org.javamoney.moneta:moneta-core" />
     </module>
 
     <module name="org.jboss.logging.processor" skip="true">
@@ -476,6 +494,10 @@
 
     <module name="org.jctools" skip="true">
         <include artifact="org.jctools:(.*)" />
+    </module>
+
+    <module name="org.jetbrains.annotations" skip="true">
+        <include artifact="org.jetbrains:annotations" />
     </module>
 
     <module name="org.joda.convert" skip="true">
@@ -531,10 +553,12 @@
 
     <module name="org.osgi.compendium" skip="true">
         <include artifact="org.osgi:org.osgi.compendium" />
+        <include artifact="org.osgi:osgi.cmpn" />
     </module>
 
     <module name="org.osgi.core" skip="true">
         <include artifact="org.osgi:org.osgi.core" />
+        <include artifact="org.osgi:osgi.core" />
     </module>
 
     <module name="org.ow2.asm.commons" skip="true">

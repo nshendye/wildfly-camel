@@ -20,7 +20,7 @@
   -->
 
 <!--
-  This file holds all the module definitions that are generallly skipped.
+  This file holds all the module definitions that are defined elsewhere or skipped.
 -->
 <modules xmlns="http://smartics.de/ns/jboss-modules-descriptor/2">
 
@@ -32,8 +32,9 @@
         <include artifact="com.jcraft:jsch" />
     </module>
 
-    <module name="com.rometools.rome" slot="1.0" skip="true">
-        <include artifact="rome:rome" />
+    <module name="com.rometools.rome" skip="true">
+        <include artifact="com.rometools:rome" />
+        <include artifact="com.rometools:rome-utils" />
     </module>
 
     <module name="com.thoughtworks.xstream" skip="true">
@@ -49,7 +50,11 @@
     </module>
 
     <module name="org.apache.camel.core" skip="true">
+        <include artifact="org.apache.camel:camel-api" />
         <include artifact="org.apache.camel:camel-core" />
+        <include artifact="org.apache.camel:camel-management-api" />
+        <include artifact="org.apache.camel:camel-support" />
+        <include artifact="org.apache.camel:camel-util" />
     </module>
 
     <module name="org.apache.commons.compress" skip="true">
